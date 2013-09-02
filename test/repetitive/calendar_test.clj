@@ -53,12 +53,12 @@
       (year (sub-years (set-calendar 2015 12 30) 2)) => 2013)
 
     (fact "produces lazy sequences of days"
-      (set (take 3 (daily-stream (set-calendar 2013 1 1)))) => #{(set-calendar 2013 1 1)
-                                                                 (set-calendar 2013 1 2)
-                                                                 (set-calendar 2013 1 3)})
+      (take 3 (daily-stream (set-calendar 2013 1 1))) => [(set-calendar 2013 1 1)
+                                                          (set-calendar 2013 1 2)
+                                                          (set-calendar 2013 1 3)])
 
     (fact "produces lazy sequences of months"
-      (set (take 3 (monthly-stream (set-calendar 2013 1 1)))) => #{(set-calendar 2013 1 1)
-                                                                   (set-calendar 2013 2 1)
-                                                                   (set-calendar 2013 3 1)})
+      (take 3 (monthly-stream (set-calendar 2013 1 1))) => [(set-calendar 2013 1 1)
+                                                            (set-calendar 2013 2 1)
+                                                            (set-calendar 2013 3 1)])
 
