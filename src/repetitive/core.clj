@@ -1,5 +1,8 @@
 (ns repetitive.core
-  (:require [repetitive.calendar :as c]))
+  (:use [repetitive.rules])
+  (:require [repetitive.calendar :as c]
+            [repetitive.rules :refer [Rule]])
+  (:import [repetitive.rules MonthlyRule DailyRule]))
 
 (defn schedule
   [rule]
@@ -11,6 +14,6 @@
    Can take as an optional arguement a :start-date to consider as the start data.
    If a :start-date is not given, the current data will be considered"
   [rule & {:keys [start-date] :or [start-date (c/calendar)]}]
-  (filter #(apply (:predicate rule) [%]) (c/daily-stream start-date)))
+  (filter #(apply (predicate rule) [%]) (c/daily-stream start-date)))
 
 

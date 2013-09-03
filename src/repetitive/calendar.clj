@@ -87,6 +87,29 @@
   [year month day & {:keys [time-zone] :or {time-zone "UTC"}}]
   (.getTime (set-calendar year month day :time-zone time-zone)))
 
+(defn n-day-of-week
+  "Gets the day of week as a number.
+   Starts with sunday as 1"
+  [cal]
+  (.get cal java.util.Calendar/DAY_OF_WEEK))
+
+(def days-of-the-week [:sunday :monday :tuesday :wednesday :thursday :friday :saturday])
+
+(defn day-of-week
+  "Gets a day of week as a keyword"
+  [cal]
+  (get days-of-the-week (dec (n-day-of-week cal))))
+
+(defn weekend?
+  "Returns true if calendar is on a weekend day"
+  [cal]
+  (contains? #{1 7} (n-day-of-week cal)))
+
+(defn weekday?
+  "returns true if calendar is on a weekday"
+  [cal]
+  (not (weekend? cal)))
+
 (defn- inc-unit [unit n cal]
   (doto (.clone cal)
     (.add unit n)))

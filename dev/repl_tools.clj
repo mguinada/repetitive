@@ -1,11 +1,12 @@
 (ns repl-tools
   (:use repetitive.calendar)
+  (:use repetitive.rules)
+  (:use repetitive.core)
   (:require [clojure.tools.namespace.repl :refer [refresh refresh-all set-refresh-dirs] :as repl]))
 
 (repl/set-refresh-dirs "src/")
 
 (defn init []
-  ;;(use 'repetitive.calendar)
   (prn "Init..."))
 
 (defn reload []

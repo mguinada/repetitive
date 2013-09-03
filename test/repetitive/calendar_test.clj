@@ -26,6 +26,17 @@
     (minutes (set-time (calendar) 23 59 30)) => 59
     (seconds (set-time (calendar) 23 59 30)) => 30)
 
+  (fact "allow to query if calendar is in a week day"
+    (n-day-of-week (set-calendar 2013 1 6)) => 1
+    (day-of-week (set-calendar 2013 1 6)) => :sunday)
+  
+  (fact "allow to query if calendar is in a weekday"
+    (weekday? (set-calendar 2013 1 11)) => true
+    (weekday? (set-calendar 2013 1 12)) => false
+    (weekend? (set-calendar 2013 1 11)) => false
+    (weekend? (set-calendar 2013 1 12)) => true
+    (weekend? (set-calendar 2013 1 13)) => true)
+
   (fact "works with time zones"
     (time-zone (calendar :time-zone "EST")) => "EST"
     (fact "defaults to UTC"

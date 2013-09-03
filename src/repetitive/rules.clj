@@ -7,15 +7,30 @@
     (set (distinct values))
     (set (vector values))))
 
-(defn build-rule
-  [type days]
-  {:type :monthly
-   :days days
-   :predicate (fn [cal]
-                (contains? (to-set days) (c/day cal)))})
+(defprotocol Rule
+  (predicate [rule] "Rule predicate"))
+
+(defrecord MonthlyRule [days])
+(defrecord DailyRule [])
+
+(extend-type MonthlyRule
+  Rule
+  (predicate [{days :days}]
+    (fn [cal]
+      (contains? (to-set days) (c/day cal)))))
+
+(extend-type DailyRule
+  Rule
+  (predicate [_]
+    (fn [_] true)))
 
 (defn monthly-rule
   "Defines a monthly ocurrence rule"
   [& {:keys [days] :or {days 1} :as args}]
-  (build-rule :monthly days))
+  (MonthlyRule. days))
+
+(defn daily-rule
+  "Defines a daily rule ocurrence"
+  []
+  (DailyRule.))
 
