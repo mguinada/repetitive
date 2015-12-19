@@ -3,9 +3,9 @@
             [clj-time.local :as l]
             [clj-time.periodic :as p]))
 
-(defn now
-  []
-  (l/local-now))
+(def date-time t/date-time)
+
+(def now l/local-now)
 
 (def day t/day)
 

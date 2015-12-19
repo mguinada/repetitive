@@ -1,7 +1,7 @@
 (ns repetitive.time-test
   (:require [clojure.test :refer :all]
             [repetitive.time :as t]
-            [clj-time.core :refer [date-time hours months]]))
+            [clj-time.core :as clj-time :refer [date-time]]))
 
 (deftest day-test
   (is (= 31 (t/day (date-time 2016 1 31)))))
