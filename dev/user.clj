@@ -11,7 +11,6 @@
    [clojure.string :as str]
    [clojure.test :as test]
    [clojure.tools.namespace.repl :refer (refresh refresh-all)]
-   [midje.repl]
    [repetitive.core]))
 
 (def system
@@ -51,9 +50,3 @@
   []
   (stop)
   (refresh :after 'user/go))
-
-(defn run-tests
-  "Resets the sysmte and runs tests"
-  []
-  (reset)
-  (midje.repl/autotest))
