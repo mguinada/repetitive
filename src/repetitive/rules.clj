@@ -1,5 +1,5 @@
 (ns repetitive.rules
-  (:require [repetitive.calendar :as c]))
+  (:require [repetitive.time :as t]))
 
 (defn- to-set [values]
   "Converts a single value or a vector of values into a set"
@@ -9,15 +9,15 @@
 
 (defn- check-day
   [cal {:keys [days]}]
-  (contains? (to-set days) (c/day cal)))
+  (contains? (to-set days) (t/day cal)))
 
 ;;TODO: Validate the input AND also consider week days as numbers numbers
 (defn- check-day-of-week
   [cal {days-of-week :days-of-week}]
-  (contains? (to-set days-of-week) (c/day-of-week cal)))
+  (contains? (to-set days-of-week) (t/day-of-week cal)))
 
 (defn- compose-predicate-fn
-  "Creates a predicate function that returns true if any of the 
+  "Creates a predicate function that returns true if any of the
    given functions eval to true against a given calendar date and a rule.
    Otherwise nil is returned"
   [rule & fns]
@@ -53,4 +53,3 @@
   "Defines a daily rule ocurrence"
   []
   (DailyRule.))
-
